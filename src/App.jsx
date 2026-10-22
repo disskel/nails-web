@@ -6,7 +6,7 @@ import {
 } from 'lucide-react'
 
 const STORAGE_URL = 'https://ddgpwnxjkzhvrsouijcq.supabase.co/storage/v1/object/public/catalogo'
-const WHATSAPP_NUMBER = '51947017401'
+const WHATSAPP_NUMBER = '51907538269'
 const PRODUCTOS_POR_PAGINA = 12
 
 export default function App() {
