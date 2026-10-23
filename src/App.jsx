@@ -4,6 +4,8 @@ import {
   ShoppingBag, Sparkles, Calendar, Search, Plus, Minus, 
   Trash2, CheckCircle2, PhoneCall, MapPin, Clock, X, ChevronRight, ZoomIn, ChevronDown 
 } from 'lucide-react'
+import AdminPanel from './AdminPanel'
+import { Lock } from 'lucide-react'
 
 const STORAGE_URL = 'https://ddgpwnxjkzhvrsouijcq.supabase.co/storage/v1/object/public/catalogo'
 const WHATSAPP_NUMBER = '51907538269'
@@ -20,7 +22,7 @@ export default function App() {
   const [carrito, setCarrito] = useState([])
   const [carritoAbierto, setCarritoAbierto] = useState(false)
   const [cargando, setCargando] = useState(true)
-
+  const [modoAdmin, setModoAdmin] = useState(false)
   useEffect(() => {
     cargarDatos()
   }, [])
@@ -96,6 +98,10 @@ export default function App() {
   })
 
   const productosMostrados = productosFiltrados.slice(0, limiteVisible)
+
+  if (modoAdmin) {
+  return <AdminPanel alVolver={() => { setModoAdmin(false); cargarDatos(); }} />
+  }
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 font-sans">
@@ -434,9 +440,15 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-white border-t border-stone-200 py-10 text-center text-sm text-stone-500">
+      {/* FOOTER CON ACCESO ADMIN */}
+      <footer className="bg-white border-t border-stone-200 py-10 text-center text-sm text-stone-500 space-y-3">
         <p>© {new Date().getFullYear()} <strong>Jean Nails Store</strong>. Todos los derechos reservados.</p>
+        <button
+          onClick={() => setModoAdmin(true)}
+          className="inline-flex items-center gap-1.5 text-xs text-stone-400 hover:text-pink-600 transition cursor-pointer"
+        >
+          <Lock className="w-3.5 h-3.5" /> Acceso Administrador
+        </button>
       </footer>
 
       {/* MODAL DE IMAGEN AMPLIADA (LIGHTBOX) */}
